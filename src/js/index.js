@@ -1,5 +1,6 @@
 import "../styles/style.scss";
-import "../assets/img/earth.jpg"
+import "./slider"
 
-console.log("gghghgh");
-alert("aaoooaa");
+
+const importAll = img => img.keys().map(img);
+const images = importAll(require.context('../assets/', true, /.(?:png|jpeg|jpg|svg)$/i));

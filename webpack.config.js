@@ -1,18 +1,17 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const{CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
+const webpack = require('webpack');
 
 module.exports = {
+    devtool: "source-map",
     entry: {
-        index: path.resolve(__dirname, './src/js/index.js'),
+        main: path.resolve(__dirname, './src/js/index.js'),
     },
-
     output: {
         path: path.resolve(__dirname, './dist'),
         filename: '[name].bundle.js',
-        publicPath: "/dist"
     },
     mode: 'development',
     devServer: {
@@ -23,14 +22,17 @@ module.exports = {
         hot: true,
         port: 8080,
     },
-    plugins: [  
+    experiments: {
+        asset: true
+    },
+    plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, './src/html/index.html'),
-            filename: 'index.html',
-            chunks: ['index']
+            template: path.resolve(__dirname, './src/html/index.html'), 
+            filename: 'index.html', 
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin(),
+        new webpack.HotModuleReplacementPlugin(),
     ],
     module: {
         rules: [
@@ -42,43 +44,23 @@ module.exports = {
                 test: /\.(sass|scss)$/,
                 use: [MiniCssExtractPlugin.loader, 'css-loader' , 'sass-loader']
             },
-            { 
-                test: /\.(js)$/,
-                exclude: /node_modules/, 
-                use: ['babel-loader'] 
+            {
+                test: /\.js$/,
+                exclude: /node_modules/,
+                use: ['babel-loader'],
             },
             {
-                test: /\.(png|jpe?g|gif|svg)$/i, 
-                loader: 'file-loader',
-                options: {
-                    name: './img/[name].[ext]',
-                    /*name(resourcePath, resourceQuery) {
-                        if (process.env.NODE_ENV === 'development') {
-                          return './img/[name].[ext]';
-                        }
-                        return './img/[contenthash].[ext]';
-                    }*/
+                test: /.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+                use: ["file-loader?name=assets/[folder]/[name].[ext]"],
+            },
+            
+            /*{
+                test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/,
+                type: "asset/resource",
+                generator: {
+                    filename: 'img/[name][ext]'
                 }
-                
-                
-            },
-            {
-                test: /\.(ttf|woff|woff2|eot)$/i,
-                loader: 'file-loader',
-                options:{
-                    name(resourcePath, resourceQuery) {
-                        if (process.env.NODE_ENV === 'development') {
-                          return '/fonts/[name].[ext]';
-                        }
-                        return '[contenthash].[ext]';
-                    },
-                },
-            },
-            {
-                test: /\.html$/i,
-                loader: 'html-loader',
-            }
-        ]
+            },*/
+        ],
     }
-
 }
