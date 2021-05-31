@@ -3,7 +3,8 @@
     margin: 0 auto;
     position: relative;
     border: 3px solid rgb(47, 80, 80);
-    
+    user-select: none;
+    touch-action: pan-y; 
 }
 .slider{
     width: 384px;
@@ -11,12 +12,13 @@
     overflow: hidden;
 }
 
-.slides{
+.slides-container{
     display: inline-flex;
     transition: all ease 2s;
     position: relative;
     left: 0;
 }
+
 
 .prev, .next {
     position: absolute;
