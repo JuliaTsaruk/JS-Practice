@@ -1,86 +1,47 @@
-const slider = document.querySelector(".slider");
-const slidesContainer = document.querySelector(".slides-container");
-const sliderWidth = document.querySelector(".slider").offsetWidth;
-const sliderImage = document.querySelectorAll(".slider-image");
-let imageWidthArray = [];
-let slidesContainerWidth = 0;
+const container = document.querySelector(".slides-container");
+const images = document.querySelectorAll(".slider-image");
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 const dots = document.querySelectorAll(".slider-dots_item");
-let offset = 0;
-let step = 0;
-let diff =0;
-//imageSize = 128;
-//position = 0;
-//slidesToShow =3;
+let stepSize;
+let counter = 0;
+const slidesToShow = 3;
 
-
-
-for(let i = 0; i < sliderImage.length; i++){
-    imageWidthArray.push(sliderImage[i].offsetWidth);
-    slidesContainerWidth += sliderImage[i].offsetWidth;
-    console.log(slidesContainerWidth);
-}
-slidesContainer.style.width = slidesContainerWidth + 'px';
- console.log(imageWidthArray);
-
-function moveLeft() {
-    diff = slidesContainerWidth - sliderWidth - (offset + imageWidthArray[step]);
-    if (diff >= 0) {
-        offset += imageWidthArray[step];
-        slidesContainer.style.left = -offset + 'px';
-    } 
-    if(step  == sliderImage.length){
-        step = 0;
-        offset = 0;
-    }else{
-        step++;
-    }
+function addSize(){
+    stepSize = images[0].offsetWidth;
+    images.forEach(item =>{
+        item.style.width = stepSize +'px';
+        item.style.height = 'auto';
+    })
 }
 
-function moveRight() {
-    if (offset < 0){
-        offset += imageWidthArray[step];
-        slidesContainer.style.left = offset +'px';
+function moveRight(){
+    if(counter >= images.length - slidesToShow){
+        counter = -1;
     }
-    if(offset === 0){
-        offset = - (slidesContainerWidth - sliderWidth);
-        slidesContainer.style.left = offset + 'px';
-    }else{
-        step++;
-    }
-}
-    
-  next.onclick = moveLeft;
-  prev.onclick = moveRight;
-
-
-
-
-/*function moveSlideRight(){
-    position += imageSize;
-    if(position > imageSize * (sliderImage.length - slidesToShow)){
-        position = 0;
-    }
-    slidesContainer.style.left = - position + 'px'; 
+        counter++;
+        container.style.transform = 'translateX(-' +stepSize * counter + 'px)';
 }
 
-function moveSlideLeft(){
-    position -= imageSize;
-    if(position <0){
-        position = imageSize * (sliderImage.length - slidesToShow);
+function moveLeft(){
+    if(counter <=0){
+        images.length %3 ===0 ? counter = images.length - slidesToShow:
+        images.length%3 === 1 ? counter = images.length -2:
+        counter = images.length -1;
     }
-    slidesContainer.style.left = - position + 'px';
+    counter--;
+    container.style.transform = 'translateX(-' +stepSize * counter + 'px)';
 }
 
-next.addEventListener("click", () =>{
-    moveSlideRight();
-});
+next.addEventListener("click", () => {
+    addSize();
+    moveRight();
+    });
 
 prev.addEventListener("click", () =>{
-    moveSlideLeft();
-});
-
+    addSize();
+    moveLeft();
+})
 
 let x1 = null;
 
@@ -98,13 +59,15 @@ function handleTouchMove(event){
     let xDiff = x2 - x1;
 
     if(xDiff > 0 ){
-        moveSlideLeft();
+        addSize();
+        moveLeft();
     }
      if(xDiff <0){
-        moveSlideRight();
+        addSize();
+        moveRight();
     }
     x1 = null;
 }
 
-slider.addEventListener("touchstart", handleTouchStart, false);
-slider.addEventListener("touchmove" , handleTouchMove, false);*/
+container.addEventListener("touchstart", handleTouchStart, false);
+container.addEventListener("touchmove" , handleTouchMove, false);
