@@ -36,11 +36,13 @@ function moveLeft(){
 next.addEventListener("click", () => {
     addSize();
     moveRight();
+    activeDot(counter);
     });
 
 prev.addEventListener("click", () =>{
     addSize();
     moveLeft();
+    activeDot(counter);
 })
 
 
