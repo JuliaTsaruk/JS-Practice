@@ -54,13 +54,6 @@ module.exports = {
                 use: ["file-loader?name=assets/[folder]/[name].[ext]"],
             },
             
-            /*{
-                test: /\.(jpe?g|gif|png|svg|woff|ttf|wav|mp3)$/,
-                type: "asset/resource",
-                generator: {
-                    filename: 'img/[name][ext]'
-                }
-            },*/
         ],
     }
 }

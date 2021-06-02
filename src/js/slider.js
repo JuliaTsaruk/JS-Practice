@@ -3,7 +3,7 @@ const images = document.querySelectorAll(".slider-image");
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 const dots = document.querySelectorAll(".slider-dots_item");
-let stepSize;
+let stepSize = images[0].offsetWidth;
 let counter = 0;
 const slidesToShow = 3;
 
@@ -19,8 +19,8 @@ function moveRight(){
     if(counter >= images.length - slidesToShow){
         counter = -1;
     }
-        counter++;
-        container.style.transform = 'translateX(-' +stepSize * counter + 'px)';
+    counter++;
+    container.style.transform = 'translateX(-' +stepSize * counter + 'px)';
 }
 
 function moveLeft(){
@@ -43,31 +43,21 @@ prev.addEventListener("click", () =>{
     moveLeft();
 })
 
-let x1 = null;
 
-function handleTouchStart(event){
-   
-    const firstTouch = event.touches[0];
-    x1 = firstTouch.clientX;
+const activeDot = number =>{
+    for(let dot of dots){
+        dot.classList.remove("active-dot");
+    }
+    dots[number].classList.add("active-dot");
+    let dotStep = stepSize * number;
+    container.style.transform = 'translateX(-' +dotStep + 'px)';
+
 }
 
-function handleTouchMove(event){
-    if(!x1){
-        return false;
-    }
-    let x2 = event.touches[0].clientX;
-    let xDiff = x2 - x1;
 
-    if(xDiff > 0 ){
-        addSize();
-        moveLeft();
-    }
-     if(xDiff <0){
-        addSize();
-        moveRight();
-    }
-    x1 = null;
-}
-
-container.addEventListener("touchstart", handleTouchStart, false);
-container.addEventListener("touchmove" , handleTouchMove, false);
+dots.forEach((item , indexDot) => {
+    item.addEventListener("click", () => {
+        counter = indexDot;
+        activeDot(counter);
+    })
+});

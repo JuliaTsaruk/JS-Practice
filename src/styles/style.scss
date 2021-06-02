@@ -59,7 +59,21 @@
     display: inline-block;
     transition: background-color 0.6s ease;
 }
-.active-dot{
+.active-dot,
+.slider-dots_item:hover{
     background-color: rgba(47, 80, 80, 0.8);
 }
-/*.slider-dots_item:hover */
+
+@media screen and (min-width:300px) and (max-width:850px){
+    //.prev,
+    //.next
+    .slider-dots{
+        display: none;
+    }
+    .slider{
+        overflow-x: auto;
+    }
+    .slider::-webkit-scrollbar {
+        height: 0;
+    }
+}
