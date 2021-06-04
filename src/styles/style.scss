@@ -18,7 +18,20 @@
     position: relative;
     left: 0;
 }
+.active{
+    border: 1px solid purple;
+}
+.slider-image{
+    width: 128px;
+    height: 128px;
+}
+.second{
+    width: 200px;
+}
 
+.third{
+    width: 150px;
+}
 .prev, .next {
     position: absolute;
     top: 0;

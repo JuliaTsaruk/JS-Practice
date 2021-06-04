@@ -3,45 +3,43 @@ const images = document.querySelectorAll(".slider-image");
 const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 const dots = document.querySelectorAll(".slider-dots_item");
-let stepSize = images[0].offsetWidth;
+let stepSize;
 let counter = 0;
 const slidesToShow = 3;
+const slider = document.querySelector(".slider");
+let imgSize =0;
 
-function addSize(){
-    stepSize = images[0].offsetWidth;
-    images.forEach(item =>{
-        item.style.width = stepSize +'px';
-        item.style.height = 'auto';
-    })
-}
 
-function moveRight(){
-    if(counter >= images.length - slidesToShow){
+ const moveRight = number =>{ 
+    if(counter >= images.length - 1){
         counter = -1;
+        //container.style.transform = 'translateX(0px)';
     }
     counter++;
-    container.style.transform = 'translateX(-' +stepSize * counter + 'px)';
+    imgSize =  imgSize + images[number].offsetWidth;
+    console.log(imgSize);
+    container.style.transform = 'translateX(-' +imgSize + 'px)';
+    console.log(container.style.transform);
 }
 
-function moveLeft(){
+const moveLeft = number =>{
     if(counter <=0){
-        images.length %3 ===0 ? counter = images.length - slidesToShow:
-        images.length%3 === 1 ? counter = images.length -2:
-        counter = images.length -1;
+        //images.length %3 ===0 ? counter = images.length - slidesToShow:
+        //images.length%3 === 1 ? counter = images.length -2:
+        counter = images.length;
     }
     counter--;
-    container.style.transform = 'translateX(-' +stepSize * counter + 'px)';
+    imgSize -= (images[number].offsetWidth);
+    container.style.transform = 'translateX(-' +imgSize + 'px)';
 }
 
 next.addEventListener("click", () => {
-    addSize();
-    moveRight();
+    moveRight(counter);
     activeDot(counter);
     });
 
 prev.addEventListener("click", () =>{
-    addSize();
-    moveLeft();
+    moveLeft(counter);
     activeDot(counter);
 })
 
@@ -50,12 +48,21 @@ const activeDot = number =>{
     for(let dot of dots){
         dot.classList.remove("active-dot");
     }
-    dots[number].classList.add("active-dot");
-    let dotStep = stepSize * number;
-    container.style.transform = 'translateX(-' +dotStep + 'px)';
-
+    dots[number].classList.add("active-dot");     //Хотела сделать, что i проходит по массиву картинок, до определенного 
+    let i = 0;      
+    let value = 0;                                  // индекса(индекса кнопки) и прерывается.
+    while (i < images.length){
+        if (i=== number){
+            break;
+        }
+        i++;                                      //а потом берет все длины картинок , которые он прошел,
+        value += images[i - 1].offsetWidth;              //суммирует их и сдвигает на это значение.           
+        container.style.transform = 'translateX(-' +value + 'px)';  //Но появилась проблема, теперь слайдер не сдвигается
+                                                        //на первый слайд ни при помощи точек, ни при помощи кнопок.
+        
+    }
 }
-
+    
 
 dots.forEach((item , indexDot) => {
     item.addEventListener("click", () => {
