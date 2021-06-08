@@ -6,9 +6,11 @@ const dots = document.querySelectorAll(".slider-dots_item");
 let counter = 0;
 let imgSize =0;
 
+
+
 const moveRight = number =>{ 
     if(counter >= images.length - 1){
-        imgSize = -images[0].offsetWidth;
+        imgSize =  - images[0].offsetWidth;
         counter = -1;
     }
     counter++;
@@ -40,22 +42,24 @@ prev.addEventListener("click", () =>{
     activeDot(counter);
 })
 
+
 const activeDot = number =>{
     for(let dot of dots){
         dot.classList.remove("active-dot");
     }
     dots[number].classList.add("active-dot");
-    imgSize = 0;
-    for( let i = 0; i <= number -1; i++){
-        imgSize += images[i].offsetWidth;
-    }
-    container.style.transform = 'translateX(-' +imgSize + 'px)';
 } 
 
 
 dots.forEach((item , indexDot) => {
     item.addEventListener("click", () => {
         counter = indexDot;
+        imgSize = 0;
+        for( let i = 0; i <= indexDot -1; i++){
+            imgSize += images[i].offsetWidth;
+        }
+        container.style.transform = 'translateX(-' +imgSize + 'px)';
         activeDot(counter);
     })
 });
+
