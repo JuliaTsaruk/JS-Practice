@@ -4,12 +4,9 @@ const prev = document.querySelector(".prev");
 const next = document.querySelector(".next");
 const dots = document.querySelectorAll(".slider-dots_item");
 let counter = 0;
-const slidesToShow = 3;
-const slider = document.querySelector(".slider");
 let imgSize =0;
-let sum = 0;
 
- const moveRight = number =>{ 
+const moveRight = number =>{ 
     if(counter >= images.length - 1){
         imgSize = -images[0].offsetWidth;
         counter = -1;
@@ -36,7 +33,7 @@ const moveLeft = number =>{
 next.addEventListener("click", () => {
     moveRight(counter);
     activeDot(counter);
-    });
+});
 
 prev.addEventListener("click", () =>{
     moveLeft(counter);
