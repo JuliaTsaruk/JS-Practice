@@ -19,9 +19,6 @@ numbers.forEach(number =>{
         }else if(e.target.innerText === '.' && haveDot){
             return;
         }
-        if(display2 === ' ' + '.'){
-            console.log("ffffff");
-        }
         display2 += e.target.innerText;
         displaySum.innerText = display2;
     })
