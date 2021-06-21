@@ -6,8 +6,8 @@ const dot = document.querySelector(".dot");
 const equal = document.querySelector(".equal");
 const clearAll = document.querySelector(".clear-all");
 const clearLastNumber = document.querySelector(".clear-lastnumber");
-let display1 = '';
-let display2 = '';
+let tempResult = '';
+let inputEl = '';
 let result = null;
 let lastOperation ='';
 let haveDot ='';
@@ -19,21 +19,29 @@ numbers.forEach(number =>{
         }else if(e.target.innerText === '.' && haveDot){
             return;
         }
-        display2 += e.target.innerText;
-        displaySum.innerText = display2;
+        inputEl += e.target.innerText;
+        displaySum.innerText = inputEl;
     })
 });
 
-
 operations.forEach(operation =>{
     operation.addEventListener("click", (e) =>{
-        if(!display2) return;
-        haveDot = false;
         const operationName = e.target.innerText;
-        if(display1 && display2 && lastOperation){
+        if(!inputEl && operationName === "+" || 
+        !inputEl && operationName === "/" ||
+        !inputEl && operationName === "*"){
+             return;   
+        }else if( !inputEl && !tempResult && operationName ==='-'){ 
+            inputEl = Number(inputEl);
+            displaySum.innerText = inputEl;  
+        }else if(!inputEl && operationName === '-'){
+            return;
+        }
+        haveDot = false;
+        if(tempResult && inputEl && lastOperation){
             mathOperation();
         }else{
-            result = parseFloat(display2);
+            result = parseFloat(inputEl);
         }
         fillDisplay(operationName);
         lastOperation = operationName;
@@ -42,52 +50,53 @@ operations.forEach(operation =>{
 
 
 function fillDisplay(name = ''){
-    display1 += display2 + ' ' + name + ' ';
-    inputNumbers.innerText = display1;
+    tempResult += inputEl + ' ' + name + ' ';
+    inputNumbers.innerText = tempResult;
     displaySum.innerText = '';
-    display2 = '';
+    inputEl = '';
 };
 
 function mathOperation(){
     switch(lastOperation){
         case '*':
-            result = parseFloat(result) * parseFloat(display2);
+            result = parseFloat(result) * parseFloat(inputEl);
             break;
         case '/':
-            result = parseFloat(result) / parseFloat(display2);
+            result = parseFloat(result) / parseFloat(inputEl);
             break;
         case '+':
-            result = parseFloat(result) + parseFloat(display2);
+            result = parseFloat(result) + parseFloat(inputEl);
             break;
         case '-':
-            result = parseFloat(result) - parseFloat(display2);
+            result = parseFloat(result) - parseFloat(inputEl);
             break;
     }
 }
 
 equal.addEventListener("click", () =>{
-    if(!display2 && !display1) return;
+    if(!inputEl && !tempResult) return;
     haveDot = false;
     mathOperation();
     fillDisplay();
-    displaySum.innerText = result;
-    display2 = result;
-    display1 = '';
+    displaySum.innerText =result;
+    inputEl = result;
+    tempResult = '';
 });
 
 
 clearAll.addEventListener("click", () => {
-  display1 = '';
-  display2 = '';
+  tempResult = '';
+  inputEl = '';
   inputNumbers.innerText = '0';
   displaySum.innerText = '0';
   result = '';
 });
 
 clearLastNumber.addEventListener("click", () => {
-    display2 = display2.split('').slice(0, -1).join('');
-    displaySum.innerText = display2;
+    inputEl = inputEl.split('').slice(0, -1).join('');
+    displaySum.innerText = inputEl;
 });
+
 
 window.addEventListener("keydown", (e) => {
   if (
