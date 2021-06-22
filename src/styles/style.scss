@@ -112,17 +112,11 @@ body{
 
 .display{
     background-color: rgb(250, 250, 250);
-    height: 80px;
+    height: 50px;
     width: 90%;
     text-align: right;
     padding: 20px;
-    font-size: 35px;
-}
-
-.display-number{
-    font-size: 25px;
-    opacity: 0.4;
-    height: 35px;
+    font-size: 40px;
 }
 
 .all-buttons{
@@ -130,7 +124,10 @@ body{
     display: grid;
     grid-template: repeat(4, 1fr) / repeat(4, 1fr) ;
 }
-.button{
+.button,
+.clear-all,
+.clear-lastnumber,
+.equal{
     border: 0.5px solid rgb(250, 250, 250);
     height: 80px;
     display: flex;
@@ -140,10 +137,7 @@ body{
     cursor: pointer;
 }
 
+
 .button:hover{
     background-color: rgba(47, 80, 80, 0.8); 
-}
-
-.btn-zero{
-    grid-column: 1/4;
 }
