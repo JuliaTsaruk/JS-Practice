@@ -1,6 +1,7 @@
 import "../styles/style.scss";
 import "./slider";
-import "./calculator"
+import "./calculator";
+import "./tracker"
 
 
 const importAll = img => img.keys().map(img);
