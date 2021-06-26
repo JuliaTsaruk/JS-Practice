@@ -40,14 +40,12 @@ allButtons.forEach(button =>{
         displaySum.innerText = inputEl;  
     })
 });
-
 clearAll.addEventListener("click", () => {
     tempResult = "";
     inputEl = "";
     displaySum.innerText = "0";
     haveDot = false;
   });
-
 clearLastNumber.addEventListener("click", () => {
     if(!inputEl){
         return
@@ -55,7 +53,6 @@ clearLastNumber.addEventListener("click", () => {
     inputEl = inputEl.split("").slice(0, -1).join("");
     displaySum.innerText = inputEl;
 });
-
 equal.addEventListener("click", () =>{
     let exp = displaySum.innerText;
     if(exp){
@@ -63,7 +60,6 @@ equal.addEventListener("click", () =>{
         displaySum.innerText = inputEl;
     }
 });
-
 window.addEventListener("keydown", (e) => {
     if (
       e.key === "0" ||
@@ -92,15 +88,14 @@ window.addEventListener("keydown", (e) => {
     }else if (e.key === "Backspace"){
         clearLastNumber.click();
     }
-  });
-  
-  function clickButtonEl(key) {
+});
+function clickButtonEl(key) {
     allButtons.forEach((button) => {
-      if (button.innerText === key) {
+        if (button.innerText === key) {
         button.click();
-      }
+        }
     });
-  };
+};
 
 
 

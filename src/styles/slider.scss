@@ -1,0 +1,89 @@
+body{
+    user-select: none;
+}
+.wrapper{
+    width:600px;
+    margin: 0 auto;
+    position: relative;
+    border: 3px solid rgb(47, 80, 80);
+    user-select: none;
+    touch-action: pan-y; 
+}
+.slider{
+    width: 384px;
+    margin: 50px auto;
+    overflow: hidden;
+}
+.slides-container{
+    display: inline-flex;
+    transition: all ease 2s;
+    position: relative;
+    left: 0;
+}
+.slider-image{
+    width: 128px;
+    height: 128px;
+}
+.second{
+    width: 200px;
+}
+.third{
+    width: 150px;
+}
+.prev, .next {
+    position: absolute;
+    top: 0;
+    top: 50%;
+    width: auto;
+    margin-top: -22px;
+    padding: 16px;
+    color: rgb(255, 127, 80);
+    font-weight: bold;
+    font-size: 22px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    border: none;
+}
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+.prev{
+    left: 0;
+}
+.prev:hover,
+.next:hover {
+    background-color: rgba(47, 80, 80, 0.8);
+    color: rgb(252, 252, 252);
+}
+.slider-dots {
+    text-align: center;
+    margin-top: 20px;
+}
+.slider-dots_item{
+    height: 12px;
+    width: 12px;
+    margin: 0 2px;
+    background-color: rgba(255, 127, 80,0.8);
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+.active-dot,
+.slider-dots_item:hover{
+    background-color: rgba(47, 80, 80, 0.8);
+}
+
+@media screen and (min-width:300px) and (max-width:850px){
+    .prev,
+    .next,
+    .slider-dots{
+        display: none;
+    }
+    .slider{
+        overflow-x: auto;
+    }
+    .slider::-webkit-scrollbar {
+        height: 0;
+    }
+}
