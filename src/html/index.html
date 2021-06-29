@@ -1,75 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Doc</title>
-</head>
-<body>
+  </head>
+  <body>
     <section class="js-slider">
-        <div class="wrapper">
-            <div class="slider">
-                <div class="slides-container">
-                <img src="../assets/img/pizza.png" alt="img" class="slider-image">
-                <img src="../assets/img/hamburger.png" alt="img" class="slider-image second">
-                <img src="../assets/img/chicken.png" alt="img" class="slider-image third"> 
-                <img src="../assets/img/meat-ball.png" alt="img" class="slider-image">
-                <img src="../assets/img/rice.png" alt="img" class="slider-image">
-                <img src="../assets/img/sausage.png" alt="img" class="slider-image">
-                <img src="../assets/img/shrimp.png" alt="img" class="slider-image">
-                </div>
-                <button class="prev">&#10094;</button>
-                <button class="next">&#10095;</button>
-                <div class="slider-dots">
-                    <span class="slider-dots_item active-dot"></span> 
-                    <span class="slider-dots_item"></span> 
-                    <span class="slider-dots_item"></span>
-                    <span class="slider-dots_item"></span>
-                    <span class="slider-dots_item"></span>
-                    <span class="slider-dots_item"></span>
-                    <span class="slider-dots_item"></span>
-                </div>
-            </div>
+      <div class="wrapper">
+        <div class="slider">
+          <div class="slides-container">
+            <img src="../assets/img/pizza.png" alt="img" class="slider-image" />
+            <img src="../assets/img/hamburger.png" alt="img" class="slider-image second"/>
+            <img src="../assets/img/chicken.png" alt="img" class="slider-image third"/>
+            <img src="../assets/img/meat-ball.png" alt="img" class="slider-image"/>
+            <img src="../assets/img/rice.png" alt="img" class="slider-image"/>
+            <img src="../assets/img/sausage.png" alt="img" class="slider-image"/>
+            <img src="../assets/img/shrimp.png" alt="img" class="slider-image"/>
+          </div>
+          <button class="prev">&#10094;</button>
+          <button class="next">&#10095;</button>
+          <div class="slider-dots">
+            <span class="slider-dots_item active-dot"></span>
+            <span class="slider-dots_item"></span>
+            <span class="slider-dots_item"></span>
+            <span class="slider-dots_item"></span>
+            <span class="slider-dots_item"></span>
+            <span class="slider-dots_item"></span>
+            <span class="slider-dots_item"></span>
+          </div>
         </div>
+      </div>
     </section>
     <section class="js-calculator">
-        <div class="calculator-container">
-            <div class="display">
-                <div class="display-result">0</div>
-            </div>
-            <div class="all-buttons">
-                <div class="clear-all">C</div>
-                <div class="clear-lastnumber">&lt;</div>
-                <div class="button operation">*</div>
-                <div class="button operation">/</div>
-                <div class="button number">7</div>
-                <div class="button number">8</div>
-                <div class="button number">9</div>
-                <div class="button operation">+</div>
-                <div class="button number">4</div>
-                <div class="button number">5</div>
-                <div class="button number">6</div>
-                <div class="button operation">-</div>
-                <div class="button number">1</div>
-                <div class="button number">2</div>
-                <div class="button number">3</div>
-                <div class="button number dot">.</div>
-                <div class="button number btn-zero">0</div>
-                <div class="button operation">(</div>
-                <div class="button operation">)</div>
-                <div class="operation equal">=</div>
-            </div>
+      <div class="calculator-container">
+        <div class="display">
+          <div class="display-result">0</div>
         </div>
+        <div class="all-buttons">
+          <div class="clear-all">C</div>
+          <div class="clear-lastnumber">&lt;</div>
+          <div class="button operation">*</div>
+          <div class="button operation">/</div>
+          <div class="button number">7</div>
+          <div class="button number">8</div>
+          <div class="button number">9</div>
+          <div class="button operation">+</div>
+          <div class="button number">4</div>
+          <div class="button number">5</div>
+          <div class="button number">6</div>
+          <div class="button operation">-</div>
+          <div class="button number">1</div>
+          <div class="button number">2</div>
+          <div class="button number">3</div>
+          <div class="button number dot">.</div>
+          <div class="button number btn-zero">0</div>
+          <div class="button operation">(</div>
+          <div class="button operation">)</div>
+          <div class="operation equal">=</div>
+        </div>
+      </div>
     </section>
-    
-
-
-
-
-
-
-
-   
-</body>
+    <section class="js-pomodorotracker">
+      <div class="tracker-container">
+        <div class="time-settings">
+          <form id="form">
+            <div class="time-settings__work">
+              <label>Время для работы</label>
+              <input class="work__input" id="input" value="25" type="number"/>мин
+            </div>
+            <div class="time-settings__relax">
+              <label>Время для отдыха</label>
+              <input class="relax__input" id="input" value="5" type="number"/>мин
+            </div>
+          </form>
+        </div>
+        <div class="timer"></div>
+        <audio src="http://soundbible.com/mp3/service-bell_daniel_simion.mp3"></audio>
+        <div class="tracker-control">
+          <button class="tracker-control__start" id="start-button">Начать</button>
+          <button class="tracker-control__pause" id="pause-button">Пауза</button>
+          <button class="tracker-control__continue" id="continue-button">Продолжить</button>
+          <button class="tracker-control__stop" id="stop-button">Стоп</button>
+        </div>
+        <div class="tracker-info">
+          <p class="tracker-info__text">Время продуктивно поработать!</p>
+        </div>
+      </div>
+    </section>
+  </body>
 </html>
