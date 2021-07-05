@@ -4,6 +4,7 @@ const equal = document.querySelector(".equal");
 const clearAll = document.querySelector(".clear-all");
 const clearLastNumber = document.querySelector(".clear-lastnumber");
 const allButtons = document.querySelectorAll(".button");
+const calculatorSection = document.querySelector(".js-calculator");
 let inputEl = "";
 let haveDot = "";
 
@@ -73,7 +74,7 @@ equal.addEventListener("click", () => {
   }
 });
 
-window.addEventListener("keydown", (e) => {
+/*window.addEventListener("keydown", (e) => {
   if (
     e.key === "0" ||
     e.key === "1" ||
@@ -109,4 +110,4 @@ function clickButtonEl(key) {
       button.click();
     }
   });
-};
+};*/
