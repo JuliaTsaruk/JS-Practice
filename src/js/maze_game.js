@@ -252,8 +252,7 @@ function showNewGame() {
 
   array = createArray(columns, rows);
   array[0][0] = true;
-
-  createArray(columns, rows);
+	console.log(array);
   pathCleaner = {
     x: 0,
     y: 0,
