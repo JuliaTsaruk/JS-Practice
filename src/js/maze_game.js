@@ -209,10 +209,10 @@ function pushKeyButtons(event) {
 
   if (xPathCleaner == xImage && yPathCleaner == yImage) {
     showCover();
-    
+
     document.removeEventListener("keydown", pushKeyButtons);
 
-    if (columns >= 9 && rows >= 9) {
+    if (columns >= 47 && rows >= 47) {
       endGameMessage.style.display = "block";
       winMessage.style.display = "none";
     } else {
