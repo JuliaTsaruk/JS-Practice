@@ -6,7 +6,7 @@
     display: block;
     background-color: rgb(216, 205, 201);
     padding: 0.8rem;
-    display:none;
+    display: none;
   }
 
   &__button {
@@ -51,7 +51,7 @@
     display: none;
     text-align: center;
 
-    &_after-win {
+    &_info {
       margin-bottom: 3rem;
     }
   }
@@ -67,7 +67,6 @@
   margin-bottom: 3rem;
   font-weight: 500;
 }
-
 
 #cover-div {
   position: fixed;

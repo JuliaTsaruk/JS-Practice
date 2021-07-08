@@ -2,9 +2,16 @@ let canvas = document.querySelector(".maze-game__game-canvas");
 const context = canvas.getContext("2d");
 const button = document.querySelector(".maze-game__button");
 
-let promtMessage = document.querySelector(".maze-game__promt");
-let okButton = document.querySelector(".button-ok");
-let noButton = document.querySelector(".button-no");
+const winMessage = document.querySelector("#win-message");
+const failMessage = document.querySelector("#fail-message");
+const endGameMessage = document.querySelector("#endgame-message");
+const promtMessage = document.querySelector(".maze-game__promt");
+const okWinButton = document.querySelector("#win-continue");
+const noWinButton = document.querySelector("#win-stop");
+const okFailButton = document.querySelector("#fail-restart");
+const noFailButton = document.querySelector("#fail-stop");
+const restartGameButton = document.querySelector("#end-restart");
+const stopGameButton = document.querySelector("#end-stop");
 
 let columns = 5;
 let rows = 5;
@@ -31,20 +38,7 @@ array[0][0] = true;
 
 button.addEventListener("click", () => {
   canvas.style.display = "block";
-
-  yImage = 0;
-  xImage = 0;
-
-  array = createArray(columns, rows);
-  array[0][0] = true;
-
-  pathCleaner = {
-    x: 0,
-    y: 0,
-  };
-
-  isReadyMaze();
-  main();
+  restartGame();
 });
 
 function main() {
@@ -92,7 +86,12 @@ function createArray(columns, rows) {
 function drawMaze() {
   for (let y = 0; y < rows; y++) {
     for (let x = 0; x < columns; x++) {
-      color = array[y][x] ? pathColor : wallColor;
+      let color;
+      if (array[x][y]) {
+        color = pathColor;
+      } else {
+        color = wallColor;
+      }
       context.beginPath();
       context.rect(x * cellSize, y * cellSize, cellSize, cellSize);
       context.fillStyle = color;
@@ -162,39 +161,39 @@ function isReadyMaze() {
   }
   return true;
 }
+document.addEventListener("keydown", pushKeyButtons);
 
-document.addEventListener("keydown", (event) => {
+function pushKeyButtons(event) {
   if (event.key == "ArrowLeft") {
     xImage -= 1 * cellSize;
     context.beginPath();
-    context.fillStyle = "white";
+    context.fillStyle = "rgb(250, 250, 250)";
     context.rect(xImage + cellSize, yImage, cellSize, cellSize);
     context.fill();
 
   } else if (event.key === "ArrowUp") {
     yImage -= 1 * cellSize;
     context.beginPath();
-    context.fillStyle = "white";
+    context.fillStyle = "rgb(250, 250, 250)";
     context.rect(xImage, yImage + cellSize, cellSize, cellSize);
     context.fill();
 
   } else if (event.key === "ArrowRight") {
     xImage += 1 * cellSize;
     context.beginPath();
-    context.fillStyle = "white";
+    context.fillStyle = "rgb(250, 250, 250)";
     context.rect(xImage - cellSize, yImage, cellSize, cellSize);
     context.fill();
 
   } else if (event.key === "ArrowDown") {
     yImage += 1 * cellSize;
     context.beginPath();
-    context.fillStyle = "white";
+    context.fillStyle = "rgb(250, 250, 250)";
     context.rect(xImage, yImage - cellSize, cellSize, cellSize);
     context.fill();
   }
-
   addStartImage();
-  //checkForCollision();
+  checkForCollision();
 
   if (
     xImage >= canvas.width ||
@@ -210,10 +209,17 @@ document.addEventListener("keydown", (event) => {
 
   if (xPathCleaner == xImage && yPathCleaner == yImage) {
     showCover();
-    promtMessage.style.display = "block";
-  }
-});
+    
+    document.removeEventListener("keydown", pushKeyButtons);
 
+    if (columns >= 9 && rows >= 9) {
+      endGameMessage.style.display = "block";
+      winMessage.style.display = "none";
+    } else {
+      winMessage.style.display = "block";
+    }
+  }
+}
 
 function showCover() {
   let coverDiv = document.createElement("div");
@@ -227,32 +233,59 @@ function hideCover() {
   document.body.style.overflowY = "";
 }
 
-okButton.addEventListener("click", () => {
-  promtMessage.style.display = "none";
+okWinButton.addEventListener("click", () => {
+  winMessage.style.display = "none";
   hideCover();
   showNewGame();
 });
 
-noButton.addEventListener("click",  () =>{
-	hideCover();
-	promtMessage.style.display = "none";
-	canvas.style.display = "none";
-})
+noWinButton.addEventListener("click", () => {
+  hideCover();
+  winMessage.style.display = "none";
+  canvas.style.display = "none";
+});
+
+okFailButton.addEventListener("click", () => {
+  failMessage.style.display = "none";
+  hideCover();
+  columns -= 2;
+  rows -= 2;
+  cellSize += 3;
+  showNewGame();
+});
+
+noFailButton.addEventListener("click", () => {
+  hideCover();
+  failMessage.style.display = "none";
+  canvas.style.display = "none";
+});
+
+restartGameButton.addEventListener("click", () => {
+  hideCover();
+  endGameMessage.style.display = "none";
+  restartGame();
+});
+
+stopGameButton.addEventListener("click", () => {
+  hideCover();
+  endGameMessage.style.display = "none";
+  canvas.style.display = "none";
+});
 
 function showNewGame() {
   columns += 2;
   rows += 2;
-  cellSize -= 2;
+  cellSize -= 3;
 
   canvas.width = columns * cellSize;
   canvas.height = rows * cellSize;
 
   yImage = 0;
   xImage = 0;
+  document.addEventListener("keydown", pushKeyButtons);
 
   array = createArray(columns, rows);
   array[0][0] = true;
-	console.log(array);
   pathCleaner = {
     x: 0,
     y: 0,
@@ -262,23 +295,43 @@ function showNewGame() {
   main();
 }
 
-/*function checkForCollision() {
- 
-  let imgData = context.getImageData(0, 0, cellSize * columns, cellSize * rows);
+function restartGame() {
+  columns = 5;
+  rows = 5;
+  cellSize = 65;
+
+  canvas.width = columns * cellSize;
+  canvas.height = rows * cellSize;
+
+  yImage = 0;
+  xImage = 0;
+  document.addEventListener("keydown", pushKeyButtons);
+
+  array = createArray(columns, rows);
+  array[0][0] = true;
+  pathCleaner = {
+    x: 0,
+    y: 0,
+  };
+  isReadyMaze();
+  main();
+}
+
+function checkForCollision() {
+  let imgData = context.getImageData(xImage, yImage, cellSize, cellSize);
   let pixels = imgData.data;
 
-  
-  for (let i = 0; (n = pixels.length), i < n; i += 3) {
+  for (let i = 0; i < pixels.length; i += 3) {
     let red = pixels[i];
     let green = pixels[i + 1];
     let blue = pixels[i + 2];
-	let alpha = pixels[i + 3];
+    let alpha = pixels[i + 3];
 
-    
     if (red == 47 && green == 80 && blue == 80) {
-      
+      document.removeEventListener("keydown", pushKeyButtons);
+      failMessage.style.display = "block";
+      showCover();
     }
+    return false;
   }
-
-  return false;
-}*/
+}
