@@ -2,6 +2,7 @@ import "../styles/style.scss";
 import "./slider";
 import "./calculator";
 import "./tracker";
+import "./weather";
 
 const importAll = (img) => img.keys().map(img);
 const images = importAll(
