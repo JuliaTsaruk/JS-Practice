@@ -1,0 +1,80 @@
+.maze-game {
+  margin-top: 100px;
+
+  &__game-canvas {
+    margin: 0 auto;
+    display: block;
+    background-color: rgb(216, 205, 201);
+    padding: 0.8rem;
+    display: none;
+  }
+
+  &__button {
+    width: 18%;
+    height: 3rem;
+    background-color: rgb(255, 127, 80);
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+    font-size: 1.5rem;
+    color: rgb(250, 250, 250);
+    border-radius: 3%;
+    border: none;
+  }
+
+  &__title {
+    font-size: 2.2rem;
+    color: rgb(47, 80, 80);
+    text-align: center;
+  }
+
+  &__info {
+    font-size: 1.2rem;
+    color: rgb(47, 80, 80);
+    text-align: center;
+    max-width: 80%;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+  }
+
+  &__promt {
+    max-width: 40%;
+    background-color: rgb(255, 127, 80);
+    font-size: 1.7rem;
+    color: rgb(250, 250, 250);
+    padding: 2rem;
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    display: none;
+    text-align: center;
+
+    &_info {
+      margin-bottom: 3rem;
+    }
+  }
+}
+
+.button-ok,
+.button-no {
+  width: 40%;
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 3%;
+  margin-bottom: 3rem;
+  font-weight: 500;
+}
+
+#cover-div {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9000;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(108, 126, 143);
+  opacity: 0.3;
+}
