@@ -1,0 +1,46 @@
+.weather-app {
+  margin-top: 6.25rem;
+  min-height: 6.25rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__container {
+    width: 30%;
+    border: 0.25rem solid rgb(255, 127, 80);
+    font-size: 1.8rem;
+    text-align: center;
+    font-family: "Neucha";
+    font-size: 2rem;
+    background-color: rgba(47, 80, 80, 0.2);
+  }
+
+  &__title {
+    font-size: 3rem;
+  }
+
+  &__city-form {
+    display: flex;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+
+  &__input {
+    border: 0.06rem dotted rgba(47, 80, 80, 0.5);
+    padding: 0.7rem 0.5rem;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+  }
+
+  &__button {
+    height: 2.43rem;
+    padding: 0 0.5rem;
+    margin-top: 0.3rem;
+    background-color: rgb(255, 127, 80);
+    color: rgb(250, 250, 250);
+    border-radius: 3%;
+    border: none;
+    font-size: 1rem;
+  }
+}

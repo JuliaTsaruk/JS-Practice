@@ -74,7 +74,7 @@ equal.addEventListener("click", () => {
   }
 });
 
-/*window.addEventListener("keydown", (e) => {
+window.addEventListener("keydown", (e) => {
   if (
     e.key === "0" ||
     e.key === "1" ||
@@ -110,4 +110,4 @@ function clickButtonEl(key) {
       button.click();
     }
   });
-};*/
+};
