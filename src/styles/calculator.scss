@@ -1,0 +1,66 @@
+.js-calculator {
+  margin-top: 100px;
+  min-height: 100px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.calculator-container {
+  width: 60%;
+  max-width: 400px;
+  background-color: rgb(255, 127, 80);
+  border-radius: 8px;
+  border: 3px solid rgb(47, 80, 80);
+}
+.display {
+  background-color: rgb(250, 250, 250);
+  height: 50px;
+  width: 90%;
+  text-align: right;
+  padding: 20px;
+  font-size: 40px;
+}
+.all-buttons {
+  color: rgb(250, 250, 250);
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+}
+.button,
+.clear-all,
+.clear-lastnumber,
+.equal {
+  border: 0.5px solid rgb(250, 250, 250);
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: rgba(47, 80, 80, 0.8);
+}
+
+@media screen and (min-width: 300px) and (max-width: 850px) {
+  .calculator-container {
+    width: 100%;
+  }
+  .display {
+    height: 40px;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 35px;
+  }
+  .display-result {
+    margin-right: 10px;
+  }
+  .button,
+  .clear-all,
+  .clear-lastnumber,
+  .equal {
+    border: 0.5px solid rgb(250, 250, 250);
+    height: 60px;
+    font-size: 25px;
+  }
+}
